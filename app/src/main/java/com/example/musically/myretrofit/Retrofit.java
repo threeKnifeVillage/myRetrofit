@@ -16,13 +16,20 @@ import okhttp3.HttpUrl;
 public class Retrofit {
 
     private final okhttp3.Call.Factory callFactory;
+    private final List<Converter.Factory> convertFactories;
+    private final List<CallAdapter.Factory> adapterFactories;
+    private final Executor callbackExecutor;
+    private final boolean validateEagerly;
 
 
     Retrofit(okhttp3.Call.Factory callFactory, HttpUrl baseUrl,
              List<Converter.Factory> converterFactories, List<CallAdapter.Factory> adapterFactories,
              Executor callbackExecutor, boolean validateEagerly) {
         this.callFactory = callFactory;
-
+        this.convertFactories = converterFactories;
+        this.adapterFactories = adapterFactories;
+        this.callbackExecutor = callbackExecutor;
+        this.validateEagerly = validateEagerly;
     }
 
     public static final class Builder {
