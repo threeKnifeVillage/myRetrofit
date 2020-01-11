@@ -52,7 +52,7 @@ public class Retrofit {
             this.platform = platform;
         }
 
-        public Retrofit builder() {
+        public Retrofit build() {
             if (baseUrl == null) {
                 throw new IllegalArgumentException(("Base URL required"));
             }
@@ -62,9 +62,9 @@ public class Retrofit {
                 callFactory = new OkHttpClient();
             }
 
-            Executor executor = this.callbackExecutor;
-            if (executor == null) {
-                // TODO 增加默认的callback
+            Executor callbackExecutor = this.callbackExecutor;
+            if (callbackExecutor == null) {
+                callbackExecutor = platform.defaultCallbackExecutor();
             }
             List<CallAdapter.Factory> adapterFactories = new ArrayList<>(this.adapterFactories);
             adapterFactories.add()

@@ -1,6 +1,11 @@
 package com.example.musically.myretrofit;
 
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.annotation.NonNull;
+
+import java.util.concurrent.Executor;
 
 /**
  * <pre>
@@ -27,5 +32,30 @@ public class Platform {
 
     public static Platform get() {
         return PLATFORM;
+    }
+
+    Executor defaultCallbackExecutor() {
+        return null;
+    }
+
+
+    static class Android extends Platform {
+
+        Executor defaultCallbackExecutor() {
+            return new Platform.Android.MainThreadExecutor();
+        }
+
+        CallAdapter.Factory defaultCallAdapterFactory(Executor callbackExecutor) {
+            return new ExecutorCallAdapterFactory(callbackExecutor);
+        }
+
+        static class MainThreadExecutor implements Executor {
+            private Handler mHandler = new Handler(Looper.getMainLooper());
+
+            @Override
+            public void execute(@NonNull Runnable command) {
+                mHandler.post(command);
+            }
+        }
     }
 }
