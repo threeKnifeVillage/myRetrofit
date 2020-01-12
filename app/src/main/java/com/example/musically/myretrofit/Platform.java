@@ -43,7 +43,6 @@ public class Platform {
         return callbackExecutor != null ? new ExecutorCallAdapterFactory(callbackExecutor) : DefaultCallAdapterFactory.INSTANCE;
     }
 
-
     static class Android extends Platform {
 
         Executor defaultCallbackExecutor() {

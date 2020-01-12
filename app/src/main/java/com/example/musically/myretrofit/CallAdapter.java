@@ -21,7 +21,5 @@ public interface CallAdapter<T> {
         }
 
         public abstract CallAdapter<?> get(Type var1, Annotation[] var2, Retrofit var3);
-
-
     }
 }
