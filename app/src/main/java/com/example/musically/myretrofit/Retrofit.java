@@ -39,7 +39,7 @@ public class Retrofit {
         private Platform platform;
         private okhttp3.Call.Factory callFactory;
         private HttpUrl baseUrl;
-        private List<Converter.Factory> convertFactories = new ArrayList<>();
+        private List<Converter.Factory> converterFactories = new ArrayList<>();
         private List<CallAdapter.Factory> adapterFactories = new ArrayList<>();
         private Executor callbackExecutor;
         private boolean validateEagerly;
@@ -66,11 +66,11 @@ public class Retrofit {
             if (callbackExecutor == null) {
                 callbackExecutor = platform.defaultCallbackExecutor();
             }
-            List<CallAdapter.Factory> adapterFactories = new ArrayList<>(this.adapterFactories);
-            adapterFactories.add()
+            List<CallAdapter.Factory> callAdapterFactories = new ArrayList<>(this.adapterFactories);
+            callAdapterFactories.add(platform.defaultCallAdapterFactory(callbackExecutor));
 
-            List<Converter.Factory> convertFactories = new ArrayList<>(this.convertFactories);
-            return new Retrofit(callFactory, baseUrl)
+            List<Converter.Factory> converterFactories = new ArrayList<>(this.converterFactories);
+            return new Retrofit(callFactory, baseUrl, converterFactories, callAdapterFactories, callbackExecutor, validateEagerly);
         }
     }
 }

@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.concurrent.Executor;
 
@@ -36,6 +37,10 @@ public class Platform {
 
     Executor defaultCallbackExecutor() {
         return null;
+    }
+
+    CallAdapter.Factory defaultCallAdapterFactory(@Nullable Executor callbackExecutor) {
+        return callbackExecutor != null ? new ExecutorCallAdapterFactory(callbackExecutor) : DefaultCallAdapterFactory.INSTANCE;
     }
 
 

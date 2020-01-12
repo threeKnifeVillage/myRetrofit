@@ -14,15 +14,13 @@ import java.lang.reflect.Type;
 public interface CallAdapter<T> {
     Type responseType();
 
-    <R> T adapter(Call<R> var1);
+    T adapter(Call<R> call);
 
-    public abstract class Factory {
+    abstract class Factory {
         public Factory() {
         }
 
         public abstract CallAdapter<?> get(Type var1, Annotation[] var2, Retrofit var3);
-
-
 
 
     }
